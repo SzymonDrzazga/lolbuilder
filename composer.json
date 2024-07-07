@@ -1,0 +1,31 @@
+{
+    "name": "szymondrzazga/lolbuilder",
+    "version": "1.0.0",
+    "description": "package made for returning random character with randomized troll build and few other lol related things",
+    "license": "MIT",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Szymondrzazga\\Lolbuilder\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Szymon Drzazga",
+            "email": "szydrzazga@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.3|^8.0",
+        "guzzlehttp/guzzle": "^7.0.1"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SzymonDrzazga\\Lolbuilder\\Providers\\LolBuilderProvider"
+            ]
+        }
+    }
+}
