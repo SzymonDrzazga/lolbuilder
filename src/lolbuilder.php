@@ -86,6 +86,65 @@ class lolbuilder
         }
     }
 
+    public function randomItems($version = '', $lang = '') {
+        try {
+            $items = $this->items($version, $lang);
+            if (empty($items)) {
+                throw new Exception('No items data available.');
+            }
+            $items = array_values($items);
+            return array_rand($items, 6);
+        } catch (Exception $e) {
+            return 'Error fetching random items: ' . $e->getMessage();
+        }
+    }
+
+    public function randomRunes($version = '', $lang = '') {
+        try {
+            $runes = $this->runes($version, $lang);
+            if (empty($runes)) {
+                throw new Exception('No runes data available.');
+            }
+            $runes = array_values($runes);
+            $primary = array_rand($runes);
+            $secondary = array_rand($runes);
+            return [$runes[$primary], $runes[$secondary]];
+        } catch (Exception $e) {
+            return 'Error fetching random runes: ' . $e->getMessage();
+        }
+    }
+
+    public function randomSummonerSpells($version = '', $lang = '') {
+        try {
+            $summonerSpells = $this->summonerSpells($version, $lang);
+            if (empty($summonerSpells)) {
+                throw new Exception('No summoner spells data available.');
+            }
+            $summonerSpells = array_values($summonerSpells);
+            return array_rand($summonerSpells, 2);
+        } catch (Exception $e) {
+            return 'Error fetching random summoner spells: ' . $e->getMessage();
+        }
+    }
+
+    public function randomBuild($champ = '', $version = '', $lang = '') {
+        try {
+            $champ = $this->champ($champ, $version, $lang);
+            if (empty($champ)) {
+                throw new Exception('No champion data available.');
+            }
+            $build = [
+                'champion' => $champ,
+                'items' => $this->randomItems(),
+                'runes' => $this->randomRunes(),
+                'summonerSpells' => $this->randomSummonerSpells()
+            ];
+            return $build;
+        } catch (Exception $e) {
+            return 'Error fetching random build: ' . $e->getMessage();
+        }
+    }
+
     public function items($version = '', $lang = '') {
         $version = $version ?: $this->version;
         $lang = $lang ?: $this->lang;

@@ -14,7 +14,6 @@ class LolBuilderProvider extends ServiceProvider
      */
     public function register()
     {
-        // Register the lolbuilder class in the service container
         $this->app->singleton(Lolbuilder::class, function ($app) {
             return new Lolbuilder();
         });
